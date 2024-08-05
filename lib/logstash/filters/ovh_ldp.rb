@@ -25,8 +25,8 @@ class LogStash::Filters::Ovh_ldp < LogStash::Filters::Base
   public
   def filter(event)
     fields = Array.new
-    event.keys.each do |key|
-      next if event.get(key).nil?
+     event.to_hash.each {|key,value|
+      next if value.nil?
       value = event.get(key)
       if value.is_a?(Array)
         if value.uniq == [ @data ]
